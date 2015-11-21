@@ -1,0 +1,60 @@
+<h3 class="panel-header" style="margin-left:20px">Flight Search</h3>
+
+<div class="row">
+    <div class="col-xs-6" style="margin-left:20px">
+        <div class="well">
+            <div class="form-group row">
+                <label for="fromText">From:</label>
+                <input id="fromText" class="form-control"
+                       ng-model="newTodo.action">
+            </div>
+            <div class="form-group row">
+                <label for="toText">To:</label>
+                <input id="toText" class="form-control"
+                       ng-model="newTodo.action">
+            </div>
+            <div class="form-group row">
+                <label for="departText">Depart:</label>
+                <input id="departDate" class="form-control" type="text"
+                       ng-model="newTodo.action">
+            </div>
+            <div class="form-group row">
+                <label for="arriveText">Arrive:</label>
+                <input id="arriveDate" class="form-control" type="text"
+                       ng-model="newTodo.action">
+            </div>
+            <div class="form-group row">
+                <label for="actionLocation">Cabin Class:</label>
+                <select id="actionLocation" class="form-control"
+                        ng-model="newTodo.location">
+                    <option>Economy</option>
+                    <option>Premium Economy</option>
+                    <option>Business Class</option>
+                    <option>First Class</option>
+                </select>
+            </div>
+            <div class="form-group row">
+                <label for="adults">Adults:</label>
+                <!--button type="button" class="decrement" data-selector="#adults">-</button-->
+                <input type="text" class="form-control" id="adults" min="1" max="8">
+                <!--button type="button" class="increment" data-selector="#adults">+</button-->
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="trip" value="return" checked="checked"/>
+                    Round Trip
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="trip" value="oneWay" />
+                    One Way
+                </label>
+            </div>
+            <button class="btn btn-primary btn-block"
+                    ng-click="addNewItem(newTodo)">
+                Search
+            </button>
+        </div>
+    </div>
+</div>
