@@ -2,6 +2,7 @@ angular.module( 'FlightSearch', [
   'templates-app',
   'templates-common',
   'FlightSearch.search',
+  'FlightSearch.results',
   'ui.router'
 ])
 

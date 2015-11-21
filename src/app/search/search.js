@@ -17,8 +17,8 @@
     });
   }
 
-  SearchController.$inject = ['ENV', '$scope', '$state', '$timeout','$stateParams','$window'];
-  function SearchController(ENV, $scope, $state, $timeout,$stateParams,$window) {
+  SearchController.$inject = ['$scope', '$state', '$timeout','$stateParams','$window'];
+  function SearchController($scope, $state, $timeout,$stateParams,$window) {
     var vm = this;
   }
 
