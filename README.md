@@ -13,3 +13,6 @@ The webpage will be built by using AngularJS framework.
   * Added Search and Result page
   * Added Grunt, Jasmine and Karma
 
+* 0.0.2:
+  * Upgrade angular js version from 1.2 to 1.4
+  * Changed Grunt to be run on PhantomJS instead of FireFox
