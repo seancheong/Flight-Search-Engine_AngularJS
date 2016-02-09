@@ -16,7 +16,7 @@
             <div class="form-group row">
                 <label for="departText">Depart:</label>
                 <input id="departDate" class="form-control" type="text"
-                       ng-model="newTodo.action">
+                       ng-model="">
             </div>
             <div class="form-group row">
                 <label for="arriveText">Arrive:</label>
@@ -26,7 +26,7 @@
             <div class="form-group row">
                 <label for="actionLocation">Cabin Class:</label>
                 <select id="actionLocation" class="form-control"
-                        ng-model="newTodo.location">
+                        ng-model="">
                     <option>Economy</option>
                     <option>Premium Economy</option>
                     <option>Business Class</option>
@@ -41,18 +41,18 @@
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" name="trip" value="return" checked="checked"/>
+                    <input type="radio" name="trip" value="return"/>
                     Round Trip
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" name="trip" value="oneWay" />
+                    <input type="radio" name="trip" value="oneWay" checked="checked"/>
                     One Way
                 </label>
             </div>
             <button class="btn btn-primary btn-block"
-                    ng-click="addNewItem(newTodo)">
+                    ng-click="vm.search()">
                 Search
             </button>
         </div>

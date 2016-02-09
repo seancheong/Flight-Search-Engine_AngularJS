@@ -1,7 +1,7 @@
 (function(angular, undefined) {
   'use strict';
 
-  var _DEPENDENCIES = ['ui.router', 'ui.bootstrap'];
+  var _DEPENDENCIES = ['ui.router', 'ui.bootstrap', 'FlightSearch-project'];
 
   angular.module('FlightSearch.search', _DEPENDENCIES)
          .config(configure);
@@ -17,9 +17,15 @@
     });
   }
 
-  SearchController.$inject = ['$scope', '$state', '$timeout','$stateParams','$window'];
-  function SearchController($scope, $state, $timeout,$stateParams,$window) {
+  SearchController.$inject = ['$scope', '$state', '$timeout','$stateParams','$window', 'flightSearchProjectService'];
+  function SearchController($scope, $state, $timeout,$stateParams,$window, flightSearchProjectService) {
     var vm = this;
+
+    vm.search = search;
+
+    function search() {
+      flightSearchProjectService.searchFlight($scope);
+    }
   }
 
 })(angular);

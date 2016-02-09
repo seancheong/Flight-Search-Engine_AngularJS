@@ -16,3 +16,7 @@ The webpage will be built by using AngularJS framework.
 * 0.0.2:
   * Upgrade angular js version from 1.2 to 1.4
   * Changed Grunt to be run on PhantomJS instead of FireFox
+
+* 0.0.3:
+  * Hooked up with Google's QPX Express API for flight search service
+  * Temporary put in a fixed dummy inputs for testing the QPX Express API
