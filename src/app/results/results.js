@@ -30,7 +30,7 @@
             data: 'myData',
             columnDefs: [
                 {field:'price', displayName: 'Price'},
-                {field:'carrier', displayName:'Carrier'},
+                {field:'carrier', displayName:'Airline'},
                 {field:'stops', displayName:'Stops'},
                 {field:'departure', displayName:'Departure'},
                 {field:'arrival', displayName:'Arrival'}

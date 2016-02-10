@@ -20,3 +20,7 @@ The webpage will be built by using AngularJS framework.
 * 0.0.3:
   * Hooked up with Google's QPX Express API for flight search service
   * Temporary put in a fixed dummy inputs for testing the QPX Express API
+
+* 0.0.4:
+  * Now able to search flight results based on cities, dates and number of passengers
+  * Results will display price (currency of departure country), airline, number of stops, departure and arrival date.

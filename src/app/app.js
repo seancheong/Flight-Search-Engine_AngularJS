@@ -5,10 +5,11 @@ var _MAIN_DEPENDENCIES = ['templates-app',
                           'templates-common',
                           'FlightSearch.search',
                           'FlightSearch.results',
-                          'ui.router'];
+                          'ui.router',
+                          'FlightSearch-data'];
 
 var _FLIGHTSEARCH_PROJECT_DEPENDENCIES = [];
-var getFlightURL = "https://www.googleapis.com/qpxExpress/v1/trips/search";                
+var getFlightURL = "https://www.googleapis.com/qpxExpress/v1/trips/search";      
 
 /**
  * This is the main project module
@@ -40,8 +41,8 @@ function AppCtrl($scope, $location, $sce, flightSearchProjectService) {
 angular.module('FlightSearch-project', _FLIGHTSEARCH_PROJECT_DEPENDENCIES)
        .factory('flightSearchProjectService', flightSearchProjectService);
 
-flightSearchProjectService.$inject = ['$timeout', '$q', '$location'];
-function flightSearchProjectService($timeout, $q, $location) {
+flightSearchProjectService.$inject = ['$timeout', '$q', '$location', 'iataDataService'];
+function flightSearchProjectService($timeout, $q, $location, iataDataService) {
 
   var flightResults = [];
 
@@ -54,10 +55,20 @@ function flightSearchProjectService($timeout, $q, $location) {
     return flightResults;
   }
 
-  function searchFlight($scope) {
+  function getAirlineIataCode(airline) {
+    var airlineIATA = iataDataService.getAirlineIATA();
+
+    for(var airlineIndex = 0; airlineIndex < airlineIATA.length; airlineIndex++) {
+      if(airlineIATA[airlineIndex]["code"] === airline) {
+        return airlineIATA[airlineIndex]["name"] + " (" + airlineIATA[airlineIndex]["icao"] + ")";
+      }
+    }
+  }
+
+  function searchFlight(from, to, adult, departDate, $scope) {
     console.log("searchFlight");
 
-    searchFlightQuery().then(function(response) {
+    searchFlightQuery(from, to, adult, departDate).then(function(response) {
       var responseObject = JSON.parse(response);
       var tripOptions = responseObject["trips"]["tripOption"];
       flightResults = [];
@@ -69,7 +80,7 @@ function flightSearchProjectService($timeout, $q, $location) {
         results["price"] = tripOptions[tripIndex]["saleTotal"];
 
         for(var segmentIndex = 0; segmentIndex < segments.length; segmentIndex++) {
-          results["carrier"] = segments[segmentIndex]["flight"]["carrier"];
+          results["carrier"] = getAirlineIataCode(segments[segmentIndex]["flight"]["carrier"]);
 
           if(segmentIndex === 0) {
             results["departure"] = segments[0]["leg"][0]["departureTime"];
@@ -88,7 +99,7 @@ function flightSearchProjectService($timeout, $q, $location) {
     });
   }
 
-  function searchFlightQuery() {
+  function searchFlightQuery(from, to, adult, departDate) {
     console.log("searchFlightQuery");
 
     var securityKey = "?key=AIzaSyAhaPZOJYLVcrq8S0BVm-2PAhOqRu2AoPs";
@@ -99,10 +110,10 @@ function flightSearchProjectService($timeout, $q, $location) {
     flightDetails["request"]["slice"] = [];
     var slice = {};
 
-    flightDetails["request"]["passengers"]["adultCount"] = 1;
-    slice["origin"] = "SIN";
-    slice["destination"] = "TYO";
-    slice["date"] = "2016-06-19";
+    flightDetails["request"]["passengers"]["adultCount"] = adult;
+    slice["origin"] = from;
+    slice["destination"] = to;
+    slice["date"] = departDate;
     flightDetails["request"]["slice"].push(slice);
     flightDetails["request"]["solutions"] = 50;
     var flightData = JSON.stringify(flightDetails);
