@@ -8,7 +8,7 @@ var _MAIN_DEPENDENCIES = ['templates-app',
                           'ui.router',
                           'FlightSearch-data'];
 
-var _FLIGHTSEARCH_PROJECT_DEPENDENCIES = [];
+var _FLIGHTSEARCH_PROJECT_DEPENDENCIES = ['angularSpinner'];
 var getFlightURL = "https://www.googleapis.com/qpxExpress/v1/trips/search";      
 
 /**
@@ -41,8 +41,8 @@ function AppCtrl($scope, $location, $sce, flightSearchProjectService) {
 angular.module('FlightSearch-project', _FLIGHTSEARCH_PROJECT_DEPENDENCIES)
        .factory('flightSearchProjectService', flightSearchProjectService);
 
-flightSearchProjectService.$inject = ['$timeout', '$q', '$location', 'iataDataService'];
-function flightSearchProjectService($timeout, $q, $location, iataDataService) {
+flightSearchProjectService.$inject = ['$timeout', '$q', '$location', 'iataDataService', 'usSpinnerService'];
+function flightSearchProjectService($timeout, $q, $location, iataDataService, usSpinnerService) {
 
   var flightResults = [];
 
@@ -91,6 +91,7 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService) {
         flightResults.push(results);
       }
       $scope.$broadcast('resultsLoaded',"successful");
+      usSpinnerService.stop('spinner-1');
 
       // navigate to results page after gotten the results.
       $timeout(function() {
@@ -101,6 +102,8 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService) {
 
   function searchFlightQuery(from, to, adult, departDate) {
     console.log("searchFlightQuery");
+
+    usSpinnerService.spin('spinner-1');
 
     var securityKey = "?key=AIzaSyAhaPZOJYLVcrq8S0BVm-2PAhOqRu2AoPs";
     var downloadURL = getFlightURL + securityKey;

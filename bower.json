@@ -10,7 +10,8 @@
     "angular-ui-router": "~0.2",
     "angular-ui-grid": "~3.0.0-rc.22",
     "eonasdan-bootstrap-datetimepicker": "~4.17.37",
-    "moment": "~2.10.6"
+    "moment": "~2.10.6",
+    "angular-spinner": "^0.8.0"
   },
   "dependencies": {}
 }

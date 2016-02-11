@@ -1,7 +1,7 @@
 {
   "author": "Sean Cheong",
   "name": "FlightSearch",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "http://wwww.seancodinglab.com",
   "licenses": {
     "type": "tbd",
@@ -31,7 +31,6 @@
     "grunt-ng-annotate": "^0.8.0",
     "karma": "^0.12.9",
     "karma-coffee-preprocessor": "^0.2.1",
-    "karma-firefox-launcher": "^0.1.3",
     "karma-phantomjs-launcher": "^0.2.1",
     "phantomjs": "^1.9.18",
     "karma-jasmine": "^0.1.5",

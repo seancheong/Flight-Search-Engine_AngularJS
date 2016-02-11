@@ -71,7 +71,8 @@ module.exports = {
       'vendor/angular-ui-grid/ui-grid.js',
       'vendor/angular-ui-utils/modules/route/route.js',
       'vendor/moment/min/moment.min.js',
-      'vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+      'vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+      'vendor/angular-spinner/angular-spinner.min.js'
     ],
     css: [
       'vendor/angular-ui-grid/ui-grid.css',
