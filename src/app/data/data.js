@@ -11925,18 +11925,6 @@
     "timezone": "1",
     "dst": "E"
   },
-  "LBG": {
-    "name": "Le Bourget",
-    "city": "Paris",
-    "country": "France",
-    "iata": "LBG",
-    "icao": "LFPB",
-    "latitude": "48.969444",
-    "longitude": "2.441389",
-    "altitude": "218",
-    "timezone": "1",
-    "dst": "E"
-  },
   "CSF": {
     "name": "Creil",
     "city": "Creil",

@@ -65,6 +65,14 @@
 
     function getIataCode(city) {
       var airport = iataDataService.getAirportIATA();
+      var test = [];
+
+      for (var key1 in airport) {
+        if (airport.hasOwnProperty(key1)) {
+          test.push(airport[key1]["city"]);
+        }
+      }
+      console.log(test);
 
       for (var key in airport) {
         if (airport.hasOwnProperty(key)) {
