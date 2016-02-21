@@ -1,6 +1,6 @@
 # Flight-Search-Engine_AngularJS
 
-This Flight Search Engine has been deployed in www.seancodinglab.com
+This Flight Search Engine has been deployed to http://www.seancodinglab.com/flight-search
 
 Attempt to create a flight search engine that has functions similar to SkyScanner.
 
@@ -10,6 +10,11 @@ The webpage will be built by using AngularJS framework.
 <br/>
 
 ### Releases: 
+
+* 0.0.6:
+  * Modified the looks and layout of the app
+  * Updated font awesome to 4.4.0
+  * Modified the data in data.json
 
 * 0.0.5:
   * Added Angular spinner to show flight results is in search progress 
