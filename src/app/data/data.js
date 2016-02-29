@@ -15933,18 +15933,6 @@
     "timezone": "-5",
     "dst": "U"
   },
-  "VGT": {
-    "name": "North Las Vegas Airport",
-    "city": "Las Vegas",
-    "country": "United States",
-    "iata": "VGT",
-    "icao": "\\N",
-    "latitude": "36.2106944",
-    "longitude": "-115.1944444",
-    "altitude": "2205",
-    "timezone": "-7",
-    "dst": "U"
-  },
   "OTR": {
     "name": "Coto 47",
     "city": "Coto 47",
@@ -33405,18 +33393,6 @@
     "timezone": "-10",
     "dst": "A"
   },
-  "LSV": {
-    "name": "Nellis Afb",
-    "city": "Las Vegas",
-    "country": "United States",
-    "iata": "LSV",
-    "icao": "KLSV",
-    "latitude": "36.236197",
-    "longitude": "-115.034253",
-    "altitude": "1870",
-    "timezone": "-8",
-    "dst": "A"
-  },
   "RIV": {
     "name": "March Arb",
     "city": "Riverside",
@@ -37879,18 +37855,6 @@
     "longitude": "-102.916139",
     "altitude": "3011",
     "timezone": "-6",
-    "dst": "A"
-  },
-  "LVS": {
-    "name": "Las Vegas Muni",
-    "city": "Las Vegas",
-    "country": "United States",
-    "iata": "LVS",
-    "icao": "KLVS",
-    "latitude": "35.654222",
-    "longitude": "-105.142389",
-    "altitude": "6877",
-    "timezone": "-7",
     "dst": "A"
   },
   "IWS": {
