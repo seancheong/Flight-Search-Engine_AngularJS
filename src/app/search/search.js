@@ -65,22 +65,13 @@
 
     function getIataCode(city) {
       var airport = iataDataService.getAirportIATA();
-      var test = [];
 
-      for (var key1 in airport) {
-        if (airport.hasOwnProperty(key1)) {
-          test.push(airport[key1]["city"]);
+      for(var dataIndex = 0; dataIndex < airport.length; dataIndex++) {
+        if(city.toLowerCase() === airport[dataIndex].name.toLowerCase()) {
+          return airport[dataIndex].code;
         }
       }
-      console.log(test);
 
-      for (var key in airport) {
-        if (airport.hasOwnProperty(key)) {
-          if(airport[key]["city"].toLowerCase() === city.toLowerCase()) {
-            return key;
-          }
-        }
-      }
       return "undefined";
     }
   }

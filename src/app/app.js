@@ -120,6 +120,7 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
     flightDetails["request"]["slice"].push(slice);
     flightDetails["request"]["solutions"] = 50;
     var flightData = JSON.stringify(flightDetails);
+    console.log(flightData);
 
     var request = $.ajax({
         url: downloadURL,
