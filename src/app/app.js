@@ -6,9 +6,10 @@ var _MAIN_DEPENDENCIES = ['templates-app',
                           'FlightSearch.search',
                           'FlightSearch.results',
                           'ui.router',
-                          'FlightSearch-data'];
+                          'FlightSearch-data',
+                          'angular-growl'];
 
-var _FLIGHTSEARCH_PROJECT_DEPENDENCIES = ['angularSpinner'];
+var _FLIGHTSEARCH_PROJECT_DEPENDENCIES = ['angularSpinner', 'angular-growl'];
 var getFlightURL = "https://www.googleapis.com/qpxExpress/v1/trips/search";      
 
 /**
@@ -20,10 +21,15 @@ angular.module('FlightSearch', _MAIN_DEPENDENCIES)
        })
        .controller('AppCtrl', AppCtrl);
 
-appConfig.$inject = ['$urlRouterProvider', '$locationProvider', '$stateProvider'];
-function appConfig($urlRouterProvider, $locationProvider, $stateProvider) {
+appConfig.$inject = ['$urlRouterProvider', '$locationProvider', '$stateProvider', 'growlProvider'];
+function appConfig($urlRouterProvider, $locationProvider, $stateProvider, growlProvider) {
   $urlRouterProvider
     .otherwise('/search');
+
+  growlProvider.onlyUniqueMessages(true);
+  growlProvider.globalDisableCountDown(true);
+  growlProvider.globalPosition('bottom-center');
+  // growlProvider.globalTimeToLive(8000);
 }
 
 AppCtrl.$inject = ['$scope', '$location', '$sce', 'flightSearchProjectService'];
@@ -41,8 +47,8 @@ function AppCtrl($scope, $location, $sce, flightSearchProjectService) {
 angular.module('FlightSearch-project', _FLIGHTSEARCH_PROJECT_DEPENDENCIES)
        .factory('flightSearchProjectService', flightSearchProjectService);
 
-flightSearchProjectService.$inject = ['$timeout', '$q', '$location', 'iataDataService', 'usSpinnerService'];
-function flightSearchProjectService($timeout, $q, $location, iataDataService, usSpinnerService) {
+flightSearchProjectService.$inject = ['$timeout', '$q', '$location', 'iataDataService', 'usSpinnerService', 'growl'];
+function flightSearchProjectService($timeout, $q, $location, iataDataService, usSpinnerService, growl) {
 
   var flightResults = [];
 
@@ -73,30 +79,35 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
       var tripOptions = responseObject["trips"]["tripOption"];
       flightResults = [];
 
-      for(var tripIndex = 0; tripIndex < tripOptions.length; tripIndex++) {
-        var results = {};
-        var segments = tripOptions[tripIndex]["slice"][0]["segment"];
+      if(tripOptions !== undefined) {
+       for(var tripIndex = 0; tripIndex < tripOptions.length; tripIndex++) {
+          var results = {};
+          var segments = tripOptions[tripIndex]["slice"][0]["segment"];
 
-        results["price"] = tripOptions[tripIndex]["saleTotal"];
+          results["price"] = tripOptions[tripIndex]["saleTotal"];
 
-        for(var segmentIndex = 0; segmentIndex < segments.length; segmentIndex++) {
-          results["carrier"] = getAirlineIataCode(segments[segmentIndex]["flight"]["carrier"]);
+          for(var segmentIndex = 0; segmentIndex < segments.length; segmentIndex++) {
+            results["carrier"] = getAirlineIataCode(segments[segmentIndex]["flight"]["carrier"]);
 
-          if(segmentIndex === 0) {
-            results["departure"] = segments[0]["leg"][0]["departureTime"];
+            if(segmentIndex === 0) {
+              results["departure"] = segments[0]["leg"][0]["departureTime"];
+            }
+            results["stops"] = segmentIndex;
+            results["arrival"] = segments[segmentIndex]["leg"][0]["arrivalTime"];
           }
-          results["stops"] = segmentIndex;
-          results["arrival"] = segments[segmentIndex]["leg"][0]["arrivalTime"];
+          flightResults.push(results);
         }
-        flightResults.push(results);
-      }
-      $scope.$broadcast('resultsLoaded',"successful");
-      usSpinnerService.stop('spinner-1');
+        $scope.$broadcast('resultsLoaded',"successful");
 
-      // navigate to results page after gotten the results.
-      $timeout(function() {
-        $location.path("/results");
-      }, 0);
+        // navigate to results page after gotten the results.
+        $timeout(function() {
+          $location.path("/results");
+        }, 0); 
+      }
+      else {
+        growl.error("No trips can't be found, please make sure that you have entered a valid city name");
+      }
+      usSpinnerService.stop('spinner-1');
     });
   }
 
@@ -140,6 +151,8 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
   function handleError( response ) {
     console.log('getting response failed...');
     console.log(JSON.stringify(response));
+    usSpinnerService.stop('spinner-1');
+    growl.error("No trips can't be found, please make sure that you have entered a valid city name!");
     return null;
   }
 

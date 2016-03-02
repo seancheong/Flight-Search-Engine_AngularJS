@@ -11,7 +11,8 @@
     "angular-ui-grid": "~3.0.0-rc.22",
     "eonasdan-bootstrap-datetimepicker": "~4.17.37",
     "moment": "~2.10.6",
-    "angular-spinner": "^0.8.0"
+    "angular-spinner": "^0.8.0",
+    "angular-growl-v2": "~0.7.9"
   },
   "dependencies": {}
 }
