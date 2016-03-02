@@ -47,8 +47,8 @@ function AppCtrl($scope, $location, $sce, flightSearchProjectService) {
 angular.module('FlightSearch-project', _FLIGHTSEARCH_PROJECT_DEPENDENCIES)
        .factory('flightSearchProjectService', flightSearchProjectService);
 
-flightSearchProjectService.$inject = ['$timeout', '$q', '$location', 'iataDataService', 'usSpinnerService', 'growl'];
-function flightSearchProjectService($timeout, $q, $location, iataDataService, usSpinnerService, growl) {
+flightSearchProjectService.$inject = ['$timeout', '$q', '$location', 'iataDataService', 'usSpinnerService', 'growl', '$http'];
+function flightSearchProjectService($timeout, $q, $location, iataDataService, usSpinnerService, growl, $http) {
 
   var flightResults = [];
 
@@ -75,7 +75,7 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
     console.log("searchFlight");
 
     searchFlightQuery(from, to, adult, departDate).then(function(response) {
-      var responseObject = JSON.parse(response);
+      var responseObject = response.data;
       var tripOptions = responseObject["trips"]["tripOption"];
       flightResults = [];
 
@@ -133,15 +133,7 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
     var flightData = JSON.stringify(flightDetails);
     console.log(flightData);
 
-    var request = $.ajax({
-        url: downloadURL,
-        type: "POST",
-        data : flightData,
-        dataType: "text",
-        contentType: "application/json"
-      });
-
-    return request.then(handleSuccess, handleError);
+    return $http.post(downloadURL, flightData).then(handleSuccess, handleError);
   }
 
   function handleSuccess( response ) {
