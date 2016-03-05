@@ -10,7 +10,7 @@ var _MAIN_DEPENDENCIES = ['templates-app',
                           'angular-growl'];
 
 var _FLIGHTSEARCH_PROJECT_DEPENDENCIES = ['angularSpinner', 'angular-growl'];
-var getFlightURL = "https://www.googleapis.com/qpxExpress/v1/trips/search";      
+var flightURL = "https://www.googleapis.com/qpxExpress/v1/trips/search";      
 
 /**
  * This is the main project module
@@ -72,8 +72,6 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
   }
 
   function searchFlight(from, to, adult, departDate, $scope) {
-    console.log("searchFlight");
-
     searchFlightQuery(from, to, adult, departDate).then(function(response) {
       var responseObject = response.data;
       var tripOptions = responseObject["trips"]["tripOption"];
@@ -117,7 +115,7 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
     usSpinnerService.spin('spinner-1');
 
     var securityKey = "?key=AIzaSyAhaPZOJYLVcrq8S0BVm-2PAhOqRu2AoPs";
-    var downloadURL = getFlightURL + securityKey;
+    var downloadURL = flightURL + securityKey;
     var flightDetails = {};
     flightDetails["request"] = {};
     flightDetails["request"]["passengers"] = {};

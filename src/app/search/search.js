@@ -1,11 +1,16 @@
 (function(angular, undefined) {
   'use strict';
 
-  var _DEPENDENCIES = ['ui.router', 'ui.bootstrap', 'FlightSearch-project', 'FlightSearch-data'];
+  var _DEPENDENCIES = ['ui.router', 
+                       'ui.bootstrap', 
+                       'FlightSearch-project', 
+                       'FlightSearch-data',
+                       'ngAutocomplete'];
 
   angular.module('FlightSearch.search', _DEPENDENCIES)
          .config(configure)
-         .directive('datepicker', datepicker);
+         .directive('datepicker', datepicker)
+         .controller('SearchController', SearchController);
 
   datepicker.$inject = ['$compile']; 
   function datepicker($compile) {
@@ -46,6 +51,13 @@
     vm.adult = 1;
     vm.departDate = "";
 
+    // google map api
+    vm.acOptions = {
+      types: '(cities)'
+    };
+    vm.acToDetails = {};
+    vm.acFromDetails = {};
+
     vm.search = search;
 
     $('#departDate').datetimepicker({
@@ -57,8 +69,8 @@
     });
 
     function search() {
-      var from = getIataCode(vm.from);
-      var to = getIataCode(vm.to);
+      var from = getIataCode(vm.acFromDetails.address_components["0"].short_name);
+      var to = getIataCode(vm.acToDetails.address_components["0"].short_name);
       
       flightSearchProjectService.searchFlight(from, to, vm.adult, vm.departDate, $scope);
     }

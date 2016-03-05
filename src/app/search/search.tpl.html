@@ -4,12 +4,12 @@
           <div class="form-group">
             <label for="fromText">From:</label>
             <input id="fromText" class="form-control"
-                   ng-model="vm.from">
+                   ng-autocomplete ng-model="vm.from" details="vm.acFromDetails" options="vm.acOptions">
           </div>
           <div class="form-group">
             <label for="toText">To:</label>
             <input id="toText" class="form-control"
-                   ng-model="vm.to">
+                   ng-autocomplete ng-model="vm.to" details="vm.acToDetails" options="vm.acOptions">
           </div>
           <div class="form-group">
             <label for="departText">Depart:</label>
