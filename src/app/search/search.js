@@ -26,6 +26,13 @@
               scope.$apply();
             }
           });
+          $('#returnDate').datetimepicker({
+            dateFormat: 'yyyy/mm/dd',
+            onSelect: function(date) {
+              ngModelCtrl.$setViewValue(date);
+              scope.$apply();
+            }
+          });
         });
       }
     };
@@ -51,6 +58,7 @@
     vm.adult = 1;
     vm.departDate = "";
     vm.returnDate = "";
+    vm.tripType = "return";
 
     // google map api
     vm.acOptions = {
@@ -69,9 +77,21 @@
       vm.departDate = $("#departDate").val();
     });
 
+    $('#returnDate').datetimepicker({
+      format : "YYYY-MM-DD"
+    });
+
+    $("#returnDate").on("dp.change", function() {
+      vm.returnDate = $("#returnDate").val();
+    });
+
     function search() {
       var from = getIataCode(vm.acFromDetails.address_components["0"].short_name);
       var to = getIataCode(vm.acToDetails.address_components["0"].short_name);
+
+      if(vm.tripType !== 'return') {
+        vm.returnDate = "";
+      }
       
       flightSearchProjectService.searchFlight(from, to, vm.adult, vm.departDate, vm.returnDate, $scope);
     }

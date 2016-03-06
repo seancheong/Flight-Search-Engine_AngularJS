@@ -170,7 +170,16 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
     slice["destination"] = to;
     slice["date"] = departDate;
     flightDetails["request"]["slice"].push(slice);
-    flightDetails["request"]["solutions"] = "50";
+    flightDetails["request"]["solutions"] = "500";
+
+    if(returnDate !== "") {
+      slice = {};
+      slice["origin"] = to;
+      slice["destination"] = from;
+      slice["date"] = returnDate;
+      flightDetails["request"]["slice"].push(slice);
+    }
+
     var flightData = JSON.stringify(flightDetails);
     console.log(flightData);
 

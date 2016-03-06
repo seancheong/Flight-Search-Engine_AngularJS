@@ -14,14 +14,14 @@
           <div class="form-group">
             <label for="departText">Depart:</label>
             <input id="departDate" class="form-control" type="text"
-                   ng-model="date">
+                   ng-model="departDate">
+          </div>
+          <div class="form-group" ng-show="vm.tripType === 'return'">
+            <label for="returnText">Return:</label>
+            <input id="returnDate" class="form-control" type="text"
+                   ng-model="returnDate">
           </div>
           <!--div class="form-group row">
-            <label for="arriveText">Arrive:</label>
-            <input id="arriveDate" class="form-control" type="text"
-                   ng-model="">
-          </div>
-          <div class="form-group row">
             <label for="actionLocation">Cabin Class:</label>
             <select id="actionLocation" class="form-control"
                     ng-model="">
@@ -37,17 +37,19 @@
             <input type="text" class="form-control" id="adults" min="1" max="8" ng-model="vm.adult">
             <!--button type="button" class="increment" data-selector="#adults">+</button-->
           </div>
-          <!--div class="radio">
-            <label>
-                <input type="radio" name="trip" value="return"/>
-                Round Trip
-            </label>
-          </div-->
-          <div class="radio">
-            <label>
-                <input type="radio" name="trip" value="oneWay" checked="checked"/>
-                One Way
-            </label>
+          <div>
+            <div class="radio">
+              <label>
+                  <input type="radio" name="trip" ng-model="vm.tripType" value="return"/>
+                  Round Trip
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                  <input type="radio" name="trip" ng-model="vm.tripType" value="oneWay"/>
+                  One Way
+              </label>
+            </div>
           </div>
           <button class="btn btn-primary btn-md"
                 ng-click="vm.search()"><i class="fa fa-paper-plane-o"></i>

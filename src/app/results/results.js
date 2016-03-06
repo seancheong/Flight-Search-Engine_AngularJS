@@ -31,6 +31,7 @@
         var vm = this;
         vm.convertTime = convertTime;
         vm.convertMinToHr = convertMinToHr;
+        vm.isReturnFlight = isReturnFlight;
 
         function convertTime(time) {
             var convertedTime = moment(time);
@@ -49,7 +50,16 @@
             }
         }
 
-        $scope.myData = flightSearchProjectService.getFlightResult();
+        vm.flightData = flightSearchProjectService.getFlightResult();
+
+        function isReturnFlight(data) {
+            if(data["return"] !== undefined) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
 
         // vm.gridOptions = {
         //     data: 'myData',
