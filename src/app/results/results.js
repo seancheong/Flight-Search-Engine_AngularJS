@@ -1,7 +1,13 @@
 (function(angular, undefined) {
     'use strict';
 
-    var _DEPENDENCIES = ['ui.grid', 'ui.grid.selection', 'ui.grid.resizeColumns', 'ui.bootstrap', 'ui.router', 'FlightSearch-project'];
+    var _DEPENDENCIES = ['ui.grid', 
+                         'ui.grid.selection', 
+                         'ui.grid.resizeColumns', 
+                         'ui.bootstrap', 
+                         'ui.router', 
+                         'FlightSearch-project',
+                         'angularUtils.directives.dirPagination'];
 
     angular.module('FlightSearch.results', _DEPENDENCIES)
         .config(configure)

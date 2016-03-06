@@ -11,7 +11,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="data in myData">
+				<tr dir-paginate="data in myData | itemsPerPage:6">
 					<td>
 						<b>{{data.totalPrice}}</b>
 						<p style="opacity: 0.5; font-size: 12px">{{data.pricePerson}}</p>
@@ -26,5 +26,10 @@
 				</tr>
 			</tbody>
 		</table>
+		<dir-pagination-controls
+			max-size="10"
+			direction-links="true"
+			boundary-links="true" >
+		</dir-pagination-controls>
 	</div>
 </div>

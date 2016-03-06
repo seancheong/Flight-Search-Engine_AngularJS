@@ -74,7 +74,8 @@ module.exports = {
       'vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
       'vendor/angular-spinner/angular-spinner.min.js',
       'vendor/angular-growl-v2/build/angular-growl.js',
-      'vendor/ngAutocomplete/src/ngAutocomplete.js'
+      'vendor/ngAutocomplete/src/ngAutocomplete.js',
+      'vendor/angular-utils-pagination/dirPagination.js'
     ],
     css: [
       'vendor/angular-ui-grid/ui-grid.css',
