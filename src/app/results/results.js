@@ -23,22 +23,41 @@
     ResultsController.$inject = ['$scope', '$state', '$timeout','$stateParams','$window', 'flightSearchProjectService'];
     function ResultsController($scope, $state, $timeout, $stateParams, $window, flightSearchProjectService) {
         var vm = this;
+        vm.convertTime = convertTime;
+        vm.convertMinToHr = convertMinToHr;
+
+        function convertTime(time) {
+            var convertedTime = moment(time);
+            return convertedTime.format('dddd') + ", " + convertedTime.format('DD-MMM') + " " + convertedTime.format('hh:mm a');
+        }
+
+        function convertMinToHr(min) {
+            var hour = Math.floor(min / 60);
+            var minute = min % 60;
+
+            if(hour < 1) {
+                return minute + "minutes";
+            }
+            else {
+                return hour + "hours " + minute + "minutes";
+            }
+        }
 
         $scope.myData = flightSearchProjectService.getFlightResult();
 
-        vm.gridOptions = {
-            data: 'myData',
-            columnDefs: [
-                {field:'price', displayName: 'Price'},
-                {field:'carrier', displayName:'Airline'},
-                {field:'stops', displayName:'Stops'},
-                {field:'departure', displayName:'Departure'},
-                {field:'arrival', displayName:'Arrival'}
-            ],
-            rowHeight: 38,
-            headerRowHeight: 40,
-            multiSelect: false
-        };
+        // vm.gridOptions = {
+        //     data: 'myData',
+        //     columnDefs: [
+        //         {field:'price', displayName: 'Price'},
+        //         {field:'carrier', displayName:'Airline'},
+        //         {field:'stops', displayName:'Stops'},
+        //         {field:'departure', displayName:'Departure'},
+        //         {field:'arrival', displayName:'Arrival'}
+        //     ],
+        //     rowHeight: 38,
+        //     headerRowHeight: 40,
+        //     multiSelect: false
+        // };
 
         $scope.$on('resultsLoaded', function(event, result) {
             if (result === "successful")

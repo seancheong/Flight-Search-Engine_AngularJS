@@ -2,7 +2,7 @@
   "name": "FlightSearch",
   "version": "0.0.2",
   "devDependencies": {
-    "jquery": "~2.1.1",
+    "jquery": "~2.2.1",
     "angular": "~1.4.8",
     "angular-mocks": "~1.4.7",
     "bootstrap": "~3.1",

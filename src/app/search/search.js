@@ -50,6 +50,7 @@
     vm.to = "";
     vm.adult = 1;
     vm.departDate = "";
+    vm.returnDate = "";
 
     // google map api
     vm.acOptions = {
@@ -72,7 +73,7 @@
       var from = getIataCode(vm.acFromDetails.address_components["0"].short_name);
       var to = getIataCode(vm.acToDetails.address_components["0"].short_name);
       
-      flightSearchProjectService.searchFlight(from, to, vm.adult, vm.departDate, $scope);
+      flightSearchProjectService.searchFlight(from, to, vm.adult, vm.departDate, vm.returnDate, $scope);
     }
 
     function getIataCode(city) {

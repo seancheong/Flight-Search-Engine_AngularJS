@@ -1,5 +1,30 @@
 <div class="container">
 	<div class="row">
-		<div class="gridStyle" ui-grid="vm.gridOptions" ui-grid-resize-columns style="height: 330px"></div>
+		<!--div class="gridStyle" ui-grid="vm.gridOptions" ui-grid-resize-columns style="height: 330px"></div-->
+
+		<table class="ui single line table">
+			<thead>
+				<tr>
+					<th>Price</th>
+					<th>Carrier</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="data in myData">
+					<td>
+						<b>{{data.totalPrice}}</b>
+						<p style="opacity: 0.5; font-size: 12px">{{data.pricePerson}}</p>
+					</td>
+					<td>{{data.carrier.join(" + ")}}</td>
+					<td>
+						<div><b>{{vm.convertTime(data.depart.departure)}}</b>
+						 ------------ <b>{{vm.convertTime(data.depart.arrival)}}</b></div>
+						 <div>[{{vm.convertMinToHr(data.departDuration)}}]</div>
+						 <div>{{data.depart.stops}} stops</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
