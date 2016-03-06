@@ -61,6 +61,16 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
     return flightResults;
   }
 
+  function getAirlineIataShortCode(airline) {
+    var airlineIATA = iataDataService.getAirlineIATA();
+
+    for(var airlineIndex = 0; airlineIndex < airlineIATA.length; airlineIndex++) {
+      if(airlineIATA[airlineIndex]["code"] === airline) {
+        return airlineIATA[airlineIndex]["icao"];
+      }
+    }
+  }
+
   function getAirlineIataCode(airline) {
     var airlineIATA = iataDataService.getAirlineIATA();
 
@@ -123,7 +133,7 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
       if((segmentIndex === 0 || results["carrier"].indexOf(carrier) === -1) && !isReturnSegment) {
         results["carrier"].push(carrier);
       }
-      segment["carrier"] = carrier;
+      segment["carrier"] = getAirlineIataShortCode(segments[segmentIndex]["flight"]["carrier"]);
       segment["cabin"] = segments[segmentIndex]["cabin"];
       segment["aircraft"] = segments[segmentIndex]["leg"][0]["aircraft"];
       segment["arrivalTime"] = segments[segmentIndex]["leg"][0]["arrivalTime"];
