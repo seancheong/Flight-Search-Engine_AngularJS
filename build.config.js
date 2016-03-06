@@ -85,9 +85,10 @@ module.exports = {
       'vendor/angular-growl-v2/build/angular-growl.css'
     ],
     assets: [
-      'vendor/angular-ui-grid/ui-grid.svg',
-      'vendor/angular-ui-grid/ui-grid.ttf',
-      'vendor/angular-ui-grid/ui-grid.woff'
+      'vendor/bootstrap/fonts/glyphicons-halflings-regular.woff',
+      'vendor/bootstrap/fonts/glyphicons-halflings-regular.eot',
+      'vendor/bootstrap/fonts/glyphicons-halflings-regular.svg',
+      'vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf'
     ]
   },
 };

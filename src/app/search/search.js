@@ -60,6 +60,8 @@
     vm.returnDate = "";
     vm.tripType = "return";
 
+    vm.isNotValidForm = isNotValidForm;
+
     // google map api
     vm.acOptions = {
       types: '(cities)'
@@ -70,7 +72,8 @@
     vm.search = search;
 
     $('#departDate').datetimepicker({
-      format : "YYYY-MM-DD"
+      format : "YYYY-MM-DD",
+      minDate: new Date()
     });
 
     $("#departDate").on("dp.change", function() {
@@ -78,16 +81,50 @@
     });
 
     $('#returnDate').datetimepicker({
-      format : "YYYY-MM-DD"
+      format : "YYYY-MM-DD",
+      minDate: new Date()
     });
 
     $("#returnDate").on("dp.change", function() {
       vm.returnDate = $("#returnDate").val();
     });
 
+    function isNotValidForm() {
+      if(vm.tripType === "return") {
+        if(vm.from !== "" && vm.to !== "" && vm.departDate !== "" && vm.returnDate !== "") {
+          return false;
+        }
+        else {
+          return true;
+        }
+      }
+      else {
+        if(vm.from !== "" && vm.to !== "" && vm.departDate !== "") {
+          return false;
+        }
+        else {
+          return true;
+        }
+      }
+    }
+
     function search() {
-      var from = getIataCode(vm.acFromDetails.address_components["0"].short_name);
-      var to = getIataCode(vm.acToDetails.address_components["0"].short_name);
+      var from ="";
+      var to = "";
+
+      if(vm.acFromDetails.address_components !== undefined) {
+        from = getIataCode(vm.acFromDetails.address_components["0"].short_name);
+      }
+      else {
+        from = vm.from;
+      }
+
+      if(vm.acToDetails.address_components !== undefined) {
+        to = getIataCode(vm.acToDetails.address_components["0"].short_name);
+      }
+      else {
+        to = vm.to;
+      }
 
       if(vm.tripType !== 'return') {
         vm.returnDate = "";

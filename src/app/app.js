@@ -106,7 +106,7 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
         }, 0); 
       }
       else {
-        growl.error("No trips can't be found, please make sure that you have entered a valid city name");
+        growl.error("No trips can be found for this inputs!");
       }
       usSpinnerService.stop('spinner-1');
     });
@@ -194,7 +194,7 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
     console.log('getting response failed...');
     console.log(JSON.stringify(response));
     usSpinnerService.stop('spinner-1');
-    growl.error("No trips can't be found, please make sure that you have entered a valid city name!");
+    growl.error("No trips can be found for this inputs!");
     return null;
   }
 

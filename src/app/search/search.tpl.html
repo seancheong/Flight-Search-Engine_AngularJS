@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <form class="col-xs-6 col-xs-offset-3">
+        <form name="flightForm" class="col-xs-6 col-xs-offset-3">
           <div class="form-group">
             <label for="fromText">From:</label>
             <input id="fromText" class="form-control"
@@ -51,7 +51,7 @@
               </label>
             </div>
           </div>
-          <button class="btn btn-primary btn-md"
+          <button class="btn btn-primary btn-md" ng-disabled="vm.isNotValidForm()"
                 ng-click="vm.search()"><i class="fa fa-paper-plane-o"></i>
              Search
           </button>
