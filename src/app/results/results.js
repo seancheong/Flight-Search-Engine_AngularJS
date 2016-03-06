@@ -13,7 +13,8 @@
         .config(configure)
         .run(function run () {
         })
-        .controller('ResultsController', ResultsController);
+        .controller('ResultsController', ResultsController)
+        .controller('ModalController', ModalController);
 
     configure.$inject = ['$stateProvider'];
     function configure($stateProvider) {
@@ -26,12 +27,13 @@
         });
     }
 
-    ResultsController.$inject = ['$scope', '$state', '$timeout','$stateParams','$window', 'flightSearchProjectService'];
-    function ResultsController($scope, $state, $timeout, $stateParams, $window, flightSearchProjectService) {
+    ResultsController.$inject = ['$scope', '$state', '$timeout','$stateParams','$window', 'flightSearchProjectService', '$modal'];
+    function ResultsController($scope, $state, $timeout, $stateParams, $window, flightSearchProjectService, $modal) {
         var vm = this;
         vm.convertTime = convertTime;
         vm.convertMinToHr = convertMinToHr;
         vm.isReturnFlight = isReturnFlight;
+        vm.details = details;
 
         function convertTime(time) {
             var convertedTime = moment(time);
@@ -61,19 +63,23 @@
             }
         }
 
-        // vm.gridOptions = {
-        //     data: 'myData',
-        //     columnDefs: [
-        //         {field:'price', displayName: 'Price'},
-        //         {field:'carrier', displayName:'Airline'},
-        //         {field:'stops', displayName:'Stops'},
-        //         {field:'departure', displayName:'Departure'},
-        //         {field:'arrival', displayName:'Arrival'}
-        //     ],
-        //     rowHeight: 38,
-        //     headerRowHeight: 40,
-        //     multiSelect: false
-        // };
+        function details(flightDetail) {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'results/results-details.tpl.html',
+                controller: 'ModalController',
+                controllerAs: 'vm',
+                size: 'lg',
+                scope: $scope,
+                keyboard: false,
+                backdrop: 'static',
+                resolve: {
+                  flightDetail: function() {
+                    return flightDetail;
+                  }
+                }
+            });
+        }
 
         $scope.$on('resultsLoaded', function(event, result) {
             if (result === "successful")
@@ -82,5 +88,34 @@
                 $scope.$apply();
             }
         });
+    }
+
+    ModalController.$inject = ['$scope', '$modalInstance', 'flightDetail'];
+    function ModalController($scope, $modalInstance, flightDetail) {
+        $scope.convertTime = convertTime;
+        $scope.isReturnFlight = isReturnFlight;
+        $scope.ok = ok;
+        $scope.departSegments = flightDetail.depart.segments;
+        if(flightDetail["return"] !== undefined) {
+            $scope.returnSegments = flightDetail["return"].segments;
+        }
+
+        function convertTime(time) {
+            var convertedTime = moment(time);
+            return convertedTime.format('dddd') + ", " + convertedTime.format('DD-MMM') + " " + convertedTime.format('hh:mm a');
+        }
+
+        function isReturnFlight() {
+            if($scope.returnSegments !== undefined) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        function ok() {
+            $modalInstance.close();
+        }
     }
 })(angular);

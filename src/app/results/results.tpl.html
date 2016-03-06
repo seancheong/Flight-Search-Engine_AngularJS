@@ -2,7 +2,7 @@
 	<div class="row">
 		<!--div class="gridStyle" ui-grid="vm.gridOptions" ui-grid-resize-columns style="height: 330px"></div-->
 
-		<table class="ui single line table">
+		<table class="ui single line selectable celled table">
 			<thead>
 				<tr>
 					<th>Price</th>
@@ -11,7 +11,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr dir-paginate="data in vm.flightData | itemsPerPage:5">
+				<tr dir-paginate="data in vm.flightData | itemsPerPage:5" ng-click="vm.details(data)">
 					<td>
 						<b>{{data.totalPrice}}</b>
 						<p style="opacity: 0.5; font-size: 12px">{{data.pricePerson}}</p>
