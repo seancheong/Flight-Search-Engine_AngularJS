@@ -29,7 +29,7 @@ function appConfig($urlRouterProvider, $locationProvider, $stateProvider, growlP
   growlProvider.onlyUniqueMessages(true);
   growlProvider.globalDisableCountDown(true);
   growlProvider.globalPosition('bottom-center');
-  // growlProvider.globalTimeToLive(8000);
+  growlProvider.globalTimeToLive(10000);
 }
 
 AppCtrl.$inject = ['$scope', '$location', '$sce', 'flightSearchProjectService'];
