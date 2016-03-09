@@ -10,7 +10,7 @@ var _MAIN_DEPENDENCIES = ['templates-app',
                           'angular-growl'];
 
 var _FLIGHTSEARCH_PROJECT_DEPENDENCIES = ['angularSpinner', 'angular-growl'];
-var flightURL = "https://www.googleapis.com/qpxExpress/v1/trips/search";      
+var flightURL = "https://www.googleapis.com/qpxExpress/v1/trips/search";
 
 /**
  * This is the main project module
@@ -167,8 +167,9 @@ function flightSearchProjectService($timeout, $q, $location, iataDataService, us
 
     usSpinnerService.spin('spinner-1');
 
-    var securityKey = "?key=AIzaSyAhaPZOJYLVcrq8S0BVm-2PAhOqRu2AoPs";
-    var downloadURL = flightURL + securityKey;
+    var apiKey = iataDataService.getApiKey();
+
+    var downloadURL = flightURL + "?key=" + apiKey;
     var flightDetails = {};
     flightDetails["request"] = {};
     flightDetails["request"]["passengers"] = {};

@@ -8,6 +8,10 @@
 
   iataDataService.$inject = ['$timeout', '$q', '$location'];
   function iataDataService($timeout, $q, $location) {
+
+    // REPLACE THIS WITH YOUR OWN API KEY
+    var apiKey = "{{API_KEY}}";
+
     var airportIATA = [
     {
       "code": "AAA",
@@ -65692,8 +65696,13 @@
 
     return {
       getAirportIATA : getAirportIATA,
-      getAirlineIATA : getAirlineIATA
+      getAirlineIATA : getAirlineIATA,
+      getApiKey : getApiKey
     };
+
+    function getApiKey() {
+      return apiKey;
+    }
 
     function getAirportIATA() {
       return airportIATA;

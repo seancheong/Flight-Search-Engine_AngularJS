@@ -19,8 +19,7 @@ describe( 'AppCtrl', function() {
     beforeEach(module('FlightSearch-project'));
     beforeEach(module('FlightSearch-data'));
 
-    var flightSearchService, iataDataService, scope, httpBackend, growl;
-    var url = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAhaPZOJYLVcrq8S0BVm-2PAhOqRu2AoPs";
+    var flightSearchService, iataDataService, scope, httpBackend, growl, apiKey, url;
 
     beforeEach(inject(function(_flightSearchProjectService_, _iataDataService_, $rootScope, $httpBackend, _growl_) {
       flightSearchService = _flightSearchProjectService_;
@@ -28,6 +27,9 @@ describe( 'AppCtrl', function() {
       scope = $rootScope.$new();
       httpBackend = $httpBackend;
       growl = _growl_;
+
+      apiKey = iataDataService.getApiKey();
+      url = "https://www.googleapis.com/qpxExpress/v1/trips/search?key=" + apiKey;
     }));
 
     afterEach(function() {
