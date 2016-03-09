@@ -4,34 +4,28 @@ This Flight Search Engine has been deployed to http://www.seancodinglab.com/flig
 
 Attempt to create a flight search engine that has functions similar to SkyScanner.
 
-The webpage will be built by using AngularJS framework.
+The webpage is built by using AngularJS framework.
 <br/>Followed by technologies such as: npm, bower, Grunt, Karma, Jasmine, etc.
+<br/>The api used for this flight search is provided by Google's QPX Express API.
+
+<br/><br/>
+
+Feel free to clone and deploy it to your own server.
+<br/>Below are the instructions on how to compile the application.
+
+<br/>
+
+### Instuctions:
+
+* Replace the apikey in ./src/app/data/data.js
+* Run npm install
+* Run bower install
+* Run grunt build
+* The app will be compiled under ./build folder
 
 <br/>
 
 ### Releases: 
 
-* 0.0.6:
-  * Modified the looks and layout of the app
-  * Updated font awesome to 4.4.0
-  * Modified the data in data.json
-
-* 0.0.5:
-  * Added Angular spinner to show flight results is in search progress 
-
-* 0.0.4:
-  * Now able to search flight results based on cities, dates and number of passengers
-  * Results will display price (currency of departure country), airline, number of stops, departure and arrival date.
-
-* 0.0.3:
-  * Hooked up with Google's QPX Express API for flight search service
-  * Temporary put in a fixed dummy inputs for testing the QPX Express API
-
-* 0.0.2:
-  * Upgrade angular js version from 1.2 to 1.4
-  * Changed Grunt to be run on PhantomJS instead of FireFox
-
-* 0.0.1: 
-  * Initial Commit
-  * Added Search and Result page
-  * Added Grunt, Jasmine and Karma
+* 1.0.0:
+  * Initial version.
