@@ -78,6 +78,7 @@
 
     $("#departDate").on("dp.change", function() {
       vm.departDate = $("#departDate").val();
+      $('#returnDate').data("DateTimePicker").minDate(vm.departDate);
     });
 
     $('#returnDate').datetimepicker({
